@@ -62,6 +62,11 @@ void Error_Handler(void);
 #define CS_IMU_Pin GPIO_PIN_12
 #define CS_IMU_GPIO_Port GPIOB
 
+/* Exported variables --------------------------------------------------------*/
+extern I2C_HandleTypeDef hi2c1;
+extern SPI_HandleTypeDef hspi1;
+extern UART_HandleTypeDef huart2;
+
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */
