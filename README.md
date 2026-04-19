@@ -41,7 +41,7 @@ pio device monitor
 
 ## Architecture Overview
 
-The flight software uses a simple ~50 Hz main loop that reads sensors, computes altitude and velocity, checks for apogee, formats CSV data, and writes to both USB CDC (debug) and SD card (FatFS).
+The flight software uses a simple ~100 Hz main loop that reads sensors, computes altitude and velocity, checks for apogee, formats CSV data, and writes to both USB CDC (debug) and SD card (FatFS).
 
 ```
 Sensors (SPI/I2C) → Data Processing → Storage & Telemetry

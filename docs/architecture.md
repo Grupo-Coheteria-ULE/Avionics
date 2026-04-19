@@ -9,7 +9,7 @@ The AVI Flight Computer is a modular embedded avionics system built around an ST
 ```
 ┌─────────────────────────────────────────────────────────────────────┐
 │                        Application Layer                           │
-│                    (main.c - 50 Hz loop)                         │
+│                    (main.c - 100 Hz loop)                         │
 ├─────────────────────────────────────────────────────────────────────┤
 │  Data Processing   │  Altitude Engine   │  Apogee Detection       │
 │  (CSV Format)   │  (Barometric)     │  (State Machine)       │
@@ -148,7 +148,7 @@ The AVI Flight Computer is a modular embedded avionics system built around an ST
 The STM32F411CE was selected for several reasons:
 
 - **Price**: Inexpensive (< €5), widely available on BlackPill boards
-- **Performance**: 96 MHz Cortex-M4F with FPU provides sufficient headroom for sensor processing at 50+ Hz
+- **Performance**: 96 MHz Cortex-M4F with FPU provides sufficient headroom for sensor processing at 100+ Hz
 - **Peripherals**: Integrated USB OTG (no external crystal needed), SPI, I2C
 - **Flash**: 512 KB flash sufficient for firmware and calibration storage
 - **RAM**: 128 KB RAM adequate for dual-buffer CSV logging
@@ -232,7 +232,7 @@ CSV was chosen as the primary data format:
 
 ### Main Loop Timing
 
-The main loop operates at approximately 50 Hz (20 ms period):
+The main loop operates at approximately 100 Hz (10 ms period):
 
 ```c
 while (1) {
