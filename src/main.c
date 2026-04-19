@@ -357,8 +357,8 @@ int main(void)
             f_sync(&g_csv_file);
         }
 
-        /* ~50 Hz data rate */
-        HAL_Delay(20);
+        /* ~100 Hz data rate */
+        HAL_Delay(10);
     }
     /* USER CODE END 3 */
 }
