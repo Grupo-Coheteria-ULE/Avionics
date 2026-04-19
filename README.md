@@ -87,4 +87,4 @@ Edit `include/config.h` to enable/disable features:
 
 ## Author
 
-Developed by **Alejandro Gil Getino** for GC_ULE (Grupo de Cohetería - Universidad Laboral de Errenteria).
+Developed by **Alejandro Gil Getino** for Grupo de Coheteria de la universidad de León.
