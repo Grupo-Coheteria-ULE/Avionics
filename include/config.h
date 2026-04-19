@@ -22,10 +22,10 @@ extern "C" {
 #define CONFIG_IMU_CALIBRATE
 
 /** @brief Enable debug output (required for any serial output). */
-#define CONFIG_SERIAL_DEBUG
+//#define CONFIG_SERIAL_DEBUG
 
 /** @brief Use USB CDC (Virtual COM Port) instead of hardware UART. */
-#define CONFIG_CDC
+//#define CONFIG_CDC
 
 /* --------------------------------------------------------------------------
  * Flash storage for IMU calibration offsets
