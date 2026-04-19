@@ -107,7 +107,7 @@ static void sdlog_setup(void);
 
 static void debug_msg(const char *msg)
 {
-#ifdef CONFIG_CDC
+#if defined(CONFIG_SERIAL_DEBUG) && defined(CONFIG_CDC)
     CDC_Transmit_FS((uint8_t *)msg, (uint16_t)strlen(msg));
     HAL_Delay(50);
 #else
@@ -281,7 +281,7 @@ int main(void)
     }
 
     /* --- Debug status messages --- */
-#ifdef CONFIG_CDC
+#if defined(CONFIG_SERIAL_DEBUG) && defined(CONFIG_CDC)
     if (sd_st == SD_SPI_OK)
         debug_msg("[SD]   OK\r\n");
     else
