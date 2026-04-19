@@ -29,6 +29,8 @@
 #include "imu.h"
 #include "ms5837.h"
 #include "csv_logger.h"
+#include "altitude.h"
+#include "apogee.h"
 #ifdef CONFIG_CDC
 #include "usbd_core.h"
 #include "usbd_cdc.h"
@@ -81,6 +83,9 @@ USBD_HandleTypeDef hUsbDeviceFS;
 
 static osal_i2c_t g_i2c_baro;
 static ms5837_t   g_baro;
+
+static altitude_ctx_t g_alt;
+static apogee_ctx_t  g_apogee;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -266,6 +271,15 @@ int main(void)
     osal_i2c_init(&g_i2c_baro, &hi2c1, 500);
     int baro_st = ms5837_init(&g_baro, &g_i2c_baro);
 
+    /* --- Altitude and Apogee init --- */
+    if (baro_st == 0) {
+        ms5837_data_t baro;
+        if (ms5837_read(&g_baro, &baro) == 0) {
+            altitude_init(&g_alt, baro.pressure);
+            apogee_init(&g_apogee);
+        }
+    }
+
     /* --- Debug status messages --- */
 #ifdef CONFIG_CDC
     if (sd_st == SD_SPI_OK)
@@ -316,6 +330,16 @@ int main(void)
             {
                 sample.temperature = baro.temperature;
                 sample.pressure = baro.pressure;
+
+                /* Update altitude and velocity */
+                uint32_t now_ms = sample.timestamp_ms / 1000;
+                int32_t vel = altitude_update(&g_alt, baro.pressure, now_ms);
+                int32_t alt = altitude_get(&g_alt);
+
+                /* Check apogee detection */
+                if (apogee_update(&g_apogee, 20, alt, vel)) {
+                    debug_msg("Paracaidas desplegado!\r\n");
+                }
             }
         }
 

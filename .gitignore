@@ -1,1 +1,24 @@
+# PlatformIO
 .pio
+
+# VSCode
+.vscode/
+
+# Python
+.venv/
+.python-version
+uv.lock
+
+# Test & Simulation
+test/
+!test/data/
+outputs/
+*.py
+
+# Docs
+docs/
+
+# IDE / OS
+.git/
+.DS_Store
+Thumbs.db
